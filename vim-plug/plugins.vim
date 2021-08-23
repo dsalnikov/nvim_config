@@ -25,5 +25,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " themes
     Plug 'joshdick/onedark.vim'
 
+    " start screen
+    Plug 'mhinz/vim-startify'
+
 call plug#end()
 
