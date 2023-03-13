@@ -1,4 +1,12 @@
 set number
+set mouse=a
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
+
+
+set clipboard=unnamed
 
 " show existing tab with 4 spaces width
 set tabstop=4
@@ -17,6 +25,7 @@ source ~/.config/nvim/vim-plug/plugins.vim
 
 lua << EOF
 require'lspconfig'.clangd.setup{on_attach=require'completion'.on_attach}
+require'lspconfig'.pyright.setup{}
 EOF
 
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
