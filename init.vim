@@ -20,12 +20,29 @@ set expandtab
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
 
+tnoremap <Esc> <C-\><C-n>
+
 
 source ~/.config/nvim/vim-plug/plugins.vim
 
 lua << EOF
-require'lspconfig'.clangd.setup{on_attach=require'completion'.on_attach}
-require'lspconfig'.pyright.setup{}
+require'cmp'.setup {
+  sources = {
+    { name = 'nvim_lsp' }
+  }
+}
+
+-- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- The following example advertise capabilities to `clangd`.
+require'lspconfig'.clangd.setup {
+  capabilities = capabilities,
+}
+
+require'lspconfig'.pyright.setup {
+  capabilities = capabilities,
+}
 EOF
 
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
